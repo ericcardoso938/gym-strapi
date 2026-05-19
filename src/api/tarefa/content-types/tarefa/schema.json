@@ -13,6 +13,9 @@
   "attributes": {
     "DescricaoTarefa": {
       "type": "string"
+    },
+    "Concluida": {
+      "type": "boolean"
     }
   }
 }

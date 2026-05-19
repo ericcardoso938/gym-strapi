@@ -470,6 +470,7 @@ export interface ApiTarefaTarefa extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    Concluida: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
