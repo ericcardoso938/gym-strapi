@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * tarefa router
+ * cliente router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::tarefa.tarefa');
+module.exports = createCoreRouter('api::cliente.cliente');

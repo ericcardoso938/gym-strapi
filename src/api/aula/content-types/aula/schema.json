@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "aulas",
+  "info": {
+    "singularName": "aula",
+    "pluralName": "aulas",
+    "displayName": "Aula"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nome": {
+      "type": "string"
+    },
+    "Horario": {
+      "type": "string"
+    },
+    "treinador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::treinador.treinador",
+      "inversedBy": "aulas"
+    },
+    "clientes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cliente.cliente",
+      "inversedBy": "aulas"
+    }
+  }
+}

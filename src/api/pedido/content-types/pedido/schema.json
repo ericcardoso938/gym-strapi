@@ -19,12 +19,6 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "Pedidos"
-    },
-    "Itens": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::item.item",
-      "inversedBy": "Pedidos"
     }
   }
 }

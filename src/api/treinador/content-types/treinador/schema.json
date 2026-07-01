@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "treinadors",
+  "info": {
+    "singularName": "treinador",
+    "pluralName": "treinadors",
+    "displayName": "Treinador"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nome": {
+      "type": "string"
+    },
+    "Especialidade": {
+      "type": "string"
+    },
+    "aulas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::aula.aula",
+      "mappedBy": "treinador"
+    }
+  }
+}

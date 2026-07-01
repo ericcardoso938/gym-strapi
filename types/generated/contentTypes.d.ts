@@ -430,30 +430,62 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiItemItem extends Struct.CollectionTypeSchema {
-  collectionName: 'items';
+export interface ApiAulaAula extends Struct.CollectionTypeSchema {
+  collectionName: 'aulas';
   info: {
-    displayName: 'Item';
-    pluralName: 'items';
-    singularName: 'item';
+    displayName: 'Aula';
+    pluralName: 'aulas';
+    singularName: 'aula';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    clientes: Schema.Attribute.Relation<'manyToMany', 'api::cliente.cliente'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Descricao: Schema.Attribute.String;
-    Disponivel: Schema.Attribute.Boolean;
-    Foto: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Horario: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::item.item'> &
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::aula.aula'> &
       Schema.Attribute.Private;
-    Pedidos: Schema.Attribute.Relation<'manyToMany', 'api::pedido.pedido'>;
+    Nome: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    Tipo: Schema.Attribute.Enumeration<['Hamburguer', 'Frito', 'Bebida']>;
-    Titulo: Schema.Attribute.String;
+    treinador: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::treinador.treinador'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiClienteCliente extends Struct.CollectionTypeSchema {
+  collectionName: 'clientes';
+  info: {
+    displayName: 'Cliente';
+    pluralName: 'clientes';
+    singularName: 'cliente';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aulas: Schema.Attribute.Relation<'manyToMany', 'api::aula.aula'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cliente.cliente'
+    > &
+      Schema.Attribute.Private;
+    Nome: Schema.Attribute.String;
+    Objetivo: Schema.Attribute.String;
+    plano: Schema.Attribute.Relation<'manyToOne', 'api::plano.plano'>;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -475,7 +507,6 @@ export interface ApiPedidoPedido extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Entregue: Schema.Attribute.Boolean;
-    Itens: Schema.Attribute.Relation<'manyToMany', 'api::item.item'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -493,28 +524,56 @@ export interface ApiPedidoPedido extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiTarefaTarefa extends Struct.CollectionTypeSchema {
-  collectionName: 'tarefas';
+export interface ApiPlanoPlano extends Struct.CollectionTypeSchema {
+  collectionName: 'planos';
   info: {
-    displayName: 'Tarefa';
-    pluralName: 'tarefas';
-    singularName: 'tarefa';
+    displayName: 'Plano';
+    pluralName: 'planos';
+    singularName: 'plano';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Concluida: Schema.Attribute.Boolean;
+    clientes: Schema.Attribute.Relation<'oneToMany', 'api::cliente.cliente'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    DescricaoTarefa: Schema.Attribute.String;
+    Exercicios: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::plano.plano'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTreinadorTreinador extends Struct.CollectionTypeSchema {
+  collectionName: 'treinadors';
+  info: {
+    displayName: 'Treinador';
+    pluralName: 'treinadors';
+    singularName: 'treinador';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aulas: Schema.Attribute.Relation<'oneToMany', 'api::aula.aula'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Especialidade: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::tarefa.tarefa'
+      'api::treinador.treinador'
     > &
       Schema.Attribute.Private;
+    Nome: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1033,9 +1092,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::item.item': ApiItemItem;
+      'api::aula.aula': ApiAulaAula;
+      'api::cliente.cliente': ApiClienteCliente;
       'api::pedido.pedido': ApiPedidoPedido;
-      'api::tarefa.tarefa': ApiTarefaTarefa;
+      'api::plano.plano': ApiPlanoPlano;
+      'api::treinador.treinador': ApiTreinadorTreinador;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
