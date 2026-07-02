@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "Titulo": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "Exercicios": {
       "type": "text"
@@ -22,6 +23,28 @@
       "relation": "oneToMany",
       "target": "api::cliente.cliente",
       "mappedBy": "plano"
+    },
+    "Preco": {
+      "type": "decimal"
+    },
+    "Descricao": {
+      "type": "text"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "plano"
+    },
+    "ImagemPlano": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

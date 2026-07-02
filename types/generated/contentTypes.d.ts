@@ -476,14 +476,20 @@ export interface ApiClienteCliente extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    dataInicio: Schema.Attribute.Date & Schema.Attribute.Required;
+    Foto: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::cliente.cliente'
     > &
       Schema.Attribute.Private;
-    Nome: Schema.Attribute.String;
-    Objetivo: Schema.Attribute.String;
+    Nome: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+    Objetivo: Schema.Attribute.String & Schema.Attribute.Required;
     plano: Schema.Attribute.Relation<'manyToOne', 'api::plano.plano'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -539,15 +545,55 @@ export interface ApiPlanoPlano extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Descricao: Schema.Attribute.Text;
     Exercicios: Schema.Attribute.Text;
+    ImagemPlano: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::plano.plano'> &
       Schema.Attribute.Private;
+    Preco: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
-    Titulo: Schema.Attribute.String;
+    Titulo: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiReservaReserva extends Struct.CollectionTypeSchema {
+  collectionName: 'reservas';
+  info: {
+    displayName: 'Reserva';
+    pluralName: 'reservas';
+    singularName: 'reserva';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    aulaId: Schema.Attribute.String;
+    aulaNome: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::reserva.reserva'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userId: Schema.Attribute.String;
+    username: Schema.Attribute.String;
   };
 }
 
@@ -563,10 +609,14 @@ export interface ApiTreinadorTreinador extends Struct.CollectionTypeSchema {
   };
   attributes: {
     aulas: Schema.Attribute.Relation<'oneToMany', 'api::aula.aula'>;
+    Biografia: Schema.Attribute.Text;
+    Contacto: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Especialidade: Schema.Attribute.String;
+    Foto: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Idade: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1062,6 +1112,7 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     Pedidos: Schema.Attribute.Relation<'oneToMany', 'api::pedido.pedido'>;
+    plano: Schema.Attribute.Relation<'manyToOne', 'api::plano.plano'>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1096,6 +1147,7 @@ declare module '@strapi/strapi' {
       'api::cliente.cliente': ApiClienteCliente;
       'api::pedido.pedido': ApiPedidoPedido;
       'api::plano.plano': ApiPlanoPlano;
+      'api::reserva.reserva': ApiReservaReserva;
       'api::treinador.treinador': ApiTreinadorTreinador;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

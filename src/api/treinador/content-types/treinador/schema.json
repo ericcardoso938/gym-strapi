@@ -22,6 +22,25 @@
       "relation": "oneToMany",
       "target": "api::aula.aula",
       "mappedBy": "treinador"
+    },
+    "Foto": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Idade": {
+      "type": "integer"
+    },
+    "Contacto": {
+      "type": "string"
+    },
+    "Biografia": {
+      "type": "text"
     }
   }
 }

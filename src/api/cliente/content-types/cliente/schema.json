@@ -12,10 +12,15 @@
   "pluginOptions": {},
   "attributes": {
     "Nome": {
-      "type": "string"
+      "type": "string",
+      "minLength": 3,
+      "required": true,
+      "unique": false,
+      "regex": "^[a-zA-ZÀ-ÿ\\s]+$"
     },
     "Objetivo": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "plano": {
       "type": "relation",
@@ -28,6 +33,20 @@
       "relation": "manyToMany",
       "target": "api::aula.aula",
       "mappedBy": "clientes"
+    },
+    "dataInicio": {
+      "type": "date",
+      "required": true
+    },
+    "Foto": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

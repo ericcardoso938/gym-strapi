@@ -71,6 +71,12 @@
       "relation": "oneToMany",
       "target": "api::pedido.pedido",
       "mappedBy": "User"
+    },
+    "plano": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::plano.plano",
+      "inversedBy": "users"
     }
   }
 }
