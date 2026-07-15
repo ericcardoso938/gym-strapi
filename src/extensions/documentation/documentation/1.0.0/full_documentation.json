@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-07-02T17:23:29.851Z"
+    "x-generation-date": "2026-07-15T08:55:35.707Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4533,12 +4533,43 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "Nome",
+              "Horario",
+              "Dia",
+              "Periodo"
+            ],
             "type": "object",
             "properties": {
               "Nome": {
                 "type": "string"
               },
               "Horario": {
+                "type": "string"
+              },
+              "Dia": {
+                "type": "string",
+                "enum": [
+                  "seg",
+                  "ter",
+                  "qua",
+                  "qui",
+                  "sex",
+                  "sab",
+                  "dom"
+                ]
+              },
+              "Duracao": {
+                "type": "string"
+              },
+              "Periodo": {
+                "type": "string",
+                "enum": [
+                  "manha",
+                  "tarde"
+                ]
+              },
+              "Cor": {
                 "type": "string"
               },
               "treinador": {
@@ -4624,6 +4655,12 @@
       },
       "Aula": {
         "type": "object",
+        "required": [
+          "Nome",
+          "Horario",
+          "Dia",
+          "Periodo"
+        ],
         "properties": {
           "id": {
             "oneOf": [
@@ -4642,6 +4679,31 @@
             "type": "string"
           },
           "Horario": {
+            "type": "string"
+          },
+          "Dia": {
+            "type": "string",
+            "enum": [
+              "seg",
+              "ter",
+              "qua",
+              "qui",
+              "sex",
+              "sab",
+              "dom"
+            ]
+          },
+          "Duracao": {
+            "type": "string"
+          },
+          "Periodo": {
+            "type": "string",
+            "enum": [
+              "manha",
+              "tarde"
+            ]
+          },
+          "Cor": {
             "type": "string"
           },
           "treinador": {
@@ -4688,6 +4750,31 @@
                       "type": "string"
                     },
                     "Horario": {
+                      "type": "string"
+                    },
+                    "Dia": {
+                      "type": "string",
+                      "enum": [
+                        "seg",
+                        "ter",
+                        "qua",
+                        "qui",
+                        "sex",
+                        "sab",
+                        "dom"
+                      ]
+                    },
+                    "Duracao": {
+                      "type": "string"
+                    },
+                    "Periodo": {
+                      "type": "string",
+                      "enum": [
+                        "manha",
+                        "tarde"
+                      ]
+                    },
+                    "Cor": {
                       "type": "string"
                     },
                     "treinador": {
@@ -7084,6 +7171,31 @@
                             "type": "string"
                           },
                           "Horario": {
+                            "type": "string"
+                          },
+                          "Dia": {
+                            "type": "string",
+                            "enum": [
+                              "seg",
+                              "ter",
+                              "qua",
+                              "qui",
+                              "sex",
+                              "sab",
+                              "dom"
+                            ]
+                          },
+                          "Duracao": {
+                            "type": "string"
+                          },
+                          "Periodo": {
+                            "type": "string",
+                            "enum": [
+                              "manha",
+                              "tarde"
+                            ]
+                          },
+                          "Cor": {
                             "type": "string"
                           },
                           "treinador": {
@@ -10300,6 +10412,31 @@
                               "Horario": {
                                 "type": "string"
                               },
+                              "Dia": {
+                                "type": "string",
+                                "enum": [
+                                  "seg",
+                                  "ter",
+                                  "qua",
+                                  "qui",
+                                  "sex",
+                                  "sab",
+                                  "dom"
+                                ]
+                              },
+                              "Duracao": {
+                                "type": "string"
+                              },
+                              "Periodo": {
+                                "type": "string",
+                                "enum": [
+                                  "manha",
+                                  "tarde"
+                                ]
+                              },
+                              "Cor": {
+                                "type": "string"
+                              },
                               "treinador": {
                                 "type": "object",
                                 "properties": {
@@ -13281,6 +13418,31 @@
                       "Horario": {
                         "type": "string"
                       },
+                      "Dia": {
+                        "type": "string",
+                        "enum": [
+                          "seg",
+                          "ter",
+                          "qua",
+                          "qui",
+                          "sex",
+                          "sab",
+                          "dom"
+                        ]
+                      },
+                      "Duracao": {
+                        "type": "string"
+                      },
+                      "Periodo": {
+                        "type": "string",
+                        "enum": [
+                          "manha",
+                          "tarde"
+                        ]
+                      },
+                      "Cor": {
+                        "type": "string"
+                      },
                       "treinador": {
                         "type": "object",
                         "properties": {
@@ -14977,6 +15139,31 @@
                   "type": "string"
                 },
                 "Horario": {
+                  "type": "string"
+                },
+                "Dia": {
+                  "type": "string",
+                  "enum": [
+                    "seg",
+                    "ter",
+                    "qua",
+                    "qui",
+                    "sex",
+                    "sab",
+                    "dom"
+                  ]
+                },
+                "Duracao": {
+                  "type": "string"
+                },
+                "Periodo": {
+                  "type": "string",
+                  "enum": [
+                    "manha",
+                    "tarde"
+                  ]
+                },
+                "Cor": {
                   "type": "string"
                 },
                 "treinador": {

@@ -442,14 +442,22 @@ export interface ApiAulaAula extends Struct.CollectionTypeSchema {
   };
   attributes: {
     clientes: Schema.Attribute.Relation<'manyToMany', 'api::cliente.cliente'>;
+    Cor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'orange'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Horario: Schema.Attribute.String;
+    Dia: Schema.Attribute.Enumeration<
+      ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
+    > &
+      Schema.Attribute.Required;
+    Duracao: Schema.Attribute.String & Schema.Attribute.DefaultTo<"45'">;
+    Horario: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::aula.aula'> &
       Schema.Attribute.Private;
-    Nome: Schema.Attribute.String;
+    Nome: Schema.Attribute.String & Schema.Attribute.Required;
+    Periodo: Schema.Attribute.Enumeration<['manha', 'tarde']> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     treinador: Schema.Attribute.Relation<
       'manyToOne',

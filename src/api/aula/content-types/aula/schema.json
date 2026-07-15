@@ -12,10 +12,30 @@
   "pluginOptions": {},
   "attributes": {
     "Nome": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "Horario": {
-      "type": "string"
+      "type": "string",
+      "required": true
+    },
+    "Dia": {
+      "type": "enumeration",
+      "enum": ["seg", "ter", "qua", "qui", "sex", "sab", "dom"],
+      "required": true
+    },
+    "Duracao": {
+      "type": "string",
+      "default": "45'"
+    },
+    "Periodo": {
+      "type": "enumeration",
+      "enum": ["manha", "tarde"],
+      "required": true
+    },
+    "Cor": {
+      "type": "string",
+      "default": "orange"
     },
     "treinador": {
       "type": "relation",

@@ -9,7 +9,6 @@ const menuItems = [
     { label: "Clientes", href: "/admin/clientes" },
     { label: "Planos", href: "/admin/planos" },
     { label: "Treinadores", href: "/admin/treinadores" },
-    { label: "Aulas", href: "/admin/aulas" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
